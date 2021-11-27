@@ -62,9 +62,7 @@ class _ResdetailWidgetState extends State<ResdetailWidget> {
         ),
 
         Center(
-          child: Text(
-            "Cold creamy ice cream sandwiched between delicious deluxe cookies.\n"
-                " Pick your favourite deluxe cookies and ice cream flavour",style: TextStyle(
+          child: Text(widget.res_description! ,style: TextStyle(
               color: Color(0xFF575E67),
               fontFamily: 'Varela',
               fontSize: 24.0

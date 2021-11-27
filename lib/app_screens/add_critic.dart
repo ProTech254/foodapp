@@ -145,9 +145,9 @@ class _AddCriticState extends State<AddCritic> {
                 try{
                   AuthResult result = await _auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
 
-
+                  FirebaseUser user_added= result.user;
                   // create a new document for the user with the uid
-                  await DatabaseService().updateUserData(firstController.text, surnameController.text, emailController.text, 0, passwordController.text);
+                  await DatabaseService(uid: user_added.uid).updateUserData(firstController.text, surnameController.text, emailController.text, 0, passwordController.text);
 
                 }catch(e){
                   print(e.toString());

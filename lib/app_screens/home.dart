@@ -2,9 +2,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/app_screens/forums.dart';
 import 'package:foodapp/app_screens/restaurants.dart';
 import 'package:foodapp/app_screens/streetfoods.dart';
 import 'package:foodapp/includes/drawer.dart';
+import 'package:foodapp/includes/forumList.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/models/userData.dart';
 import 'package:foodapp/services/auth.dart';
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(0.0),
                       side: BorderSide(color: Color.fromRGBO(0, 160, 227, 1))),
                   onPressed: () async{
-
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Forums()));
                   },
                   padding: EdgeInsets.all(10.0),
                   color: Colors.white,

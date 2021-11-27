@@ -35,6 +35,7 @@ class _ResDetailsState extends State<ResDetails> {
         appBar: AppBar(
           elevation: 0.1,
           backgroundColor: Colors.redAccent,
+          title: Text("Restaurant Detail"),
           leading: InkWell(
               onTap: (){
                 Navigator.pop(context);

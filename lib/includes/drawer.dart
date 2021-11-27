@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/app_screens/add_critic.dart';
+import 'package:foodapp/app_screens/add_forum.dart';
 import 'package:foodapp/app_screens/add_restaurant.dart';
 import 'package:foodapp/app_screens/add_streetfood.dart';
+import 'package:foodapp/app_screens/forums.dart';
 import 'package:foodapp/app_screens/profile.dart';
 import 'package:foodapp/models/userData.dart';
 import 'package:foodapp/services/auth.dart';
@@ -63,6 +65,13 @@ class _NavDrawerState extends State<NavDrawer> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCritic()))
             },
           ): Text(""),
+          role_admin ? ListTile(
+            leading: Icon(Icons.input),
+            title: Text('Add a forum'),
+            onTap: () => {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddForum()))
+            },
+          ): Text(""),
 
           ListTile(
             leading: Icon(Icons.verified_user),
@@ -84,7 +93,9 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
             leading: Icon(Icons.border_color),
             title: Text('Forums'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Forums()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),

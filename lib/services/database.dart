@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodapp/models/chatData.dart';
+import 'package:foodapp/models/forumsData.dart';
 import 'package:foodapp/models/restaurantData.dart';
 import 'package:foodapp/models/reviewsData.dart';
 import 'package:foodapp/models/streetfoodData.dart';
@@ -11,6 +13,7 @@ class DatabaseService{
   final CollectionReference userCollection = Firestore.instance.collection("users");
   final CollectionReference restaurantCollection = Firestore.instance.collection("restaurants");
   final CollectionReference streetfoodCollection = Firestore.instance.collection("streetfoods");
+  final CollectionReference forumsCollection = Firestore.instance.collection("forums");
 
   Future updateUserData (String firstname, String surname, String email, int role, String password) async {
     return await userCollection.document(uid).setData({
@@ -148,6 +151,45 @@ class DatabaseService{
   Stream<List<reviewsData>> get reviews {
     return streetfoodCollection.snapshots()
         .map(reviewListFromSnapshot);
+  }
+
+  // FORUM DATA
+  List<ForumData> forumListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+//      print(doc.data['images']);
+      return ForumData(
+        topic: doc.data['topic_name'],
+        topicID: doc.data['topicID'],
+      );
+    }).toList();
+  }
+
+  // get restaurants data using streams
+
+  Stream<List<ForumData>> get forums {
+    return forumsCollection.snapshots()
+        .map(forumListFromSnapshot);
+  }
+
+
+//  Chat data
+
+  List<ChatData> chatListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+//      print(doc.data['images']);
+      return ChatData(
+        chat : doc.data['chat'],
+        postedBy: doc.data['postedBy'],
+        topicID: doc.data['topicID'],
+        datePosted: doc.data['datePosted']
+
+      );
+    }).toList();
+  }
+
+  Stream<List<ChatData>>  chatById(String? topic_id) {
+    return  Firestore.instance.collection('chats').where("topicID", isEqualTo: topic_id).snapshots()
+        .map(chatListFromSnapshot);
   }
 
 }
